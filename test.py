@@ -20,3 +20,6 @@ def fareheit_to_celsius(fahrenheit):
         raise ValueError("fahrenheit must be a number")
     
     return (fahrenheit - 32) * 5/9
+
+while True:
+    continue
