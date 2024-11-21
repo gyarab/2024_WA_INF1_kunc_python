@@ -39,4 +39,14 @@ def is_prime(number):
             return False
     return True
 
-print(is_prime(1))
+def primes_in_range(start, end):
+    if not isinstance(start, int) or not isinstance(end, int):
+        raise ValueError("start and end must be integers")
+    
+    if start < 0 or end < 0:
+        raise ValueError("start and end must be positive integers")
+    
+    if start > end:
+        raise ValueError("start must be less than end")
+    
+    return [i for i in range(start, end+1) if is_prime(i)]
