@@ -29,7 +29,7 @@ def is_prime(number):
     if not isinstance(number, int):
         raise ValueError("n must be an integer")
     
-    if number < 0:
+    if number <= 0:
         raise ValueError("n must be a positive integer")
     
     if number < 2:
@@ -38,3 +38,5 @@ def is_prime(number):
         if number % i == 0:
             return False
     return True
+
+print(is_prime(1))
