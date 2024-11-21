@@ -1,4 +1,4 @@
-def fib(n):
+def fibonacci(n):
     if not isinstance(n, int) or n <= 0:
         raise ValueError("n must be a positive integer")
     elif n == 1:
