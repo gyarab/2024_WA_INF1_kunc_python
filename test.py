@@ -47,6 +47,6 @@ def primes_in_range(start, end):
         raise ValueError("start and end must be positive integers")
     
     if start > end:
-        raise ValueError("start must be less than end")
+        start, end = end, start 
     
     return [i for i in range(start, end+1) if is_prime(i)]
