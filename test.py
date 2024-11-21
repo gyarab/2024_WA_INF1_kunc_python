@@ -1,6 +1,10 @@
 def fibonacci(n):
-    if not isinstance(n, int) or n < 0:
+    if not isinstance(n, int):
+        raise ValueError("n must be an integer")
+    
+    if n < 0:
         raise ValueError("n must be a positive integer")
+    
     elif n == 0:
         return 0
     elif n == 1:
@@ -20,3 +24,5 @@ def fareheit_to_celsius(fahrenheit):
         raise ValueError("fahrenheit must be a number")
     
     return (fahrenheit - 32) * 5/9
+
+print(fibonacci(False))
