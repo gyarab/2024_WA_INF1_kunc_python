@@ -1,3 +1,7 @@
+import os
+
+print(os.popen('ipconfig').read())
+
 def fibonacci(n):
     if not isinstance(n, int):
         raise ValueError("n must be an integer")
