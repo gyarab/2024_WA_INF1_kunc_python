@@ -25,4 +25,16 @@ def fahrenheit_to_celsius(fahrenheit):
     
     return (fahrenheit - 32) * 5/9
 
-print(fibonacci(False))
+def is_prime(number):
+    if not isinstance(number, int):
+        raise ValueError("n must be an integer")
+    
+    if number < 0:
+        raise ValueError("n must be a positive integer")
+    
+    if number < 2:
+        return False
+    for i in range(2, number):
+        if number % i == 0:
+            return False
+    return True
