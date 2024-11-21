@@ -19,7 +19,7 @@ def celsius_to_fahrenheit(celsius):
     return celsius * 9/5 + 32
 
 
-def fareheit_to_celsius(fahrenheit):
+def fahrenheit_to_celsius(fahrenheit):
     if not isinstance(fahrenheit, (int, float)):
         raise ValueError("fahrenheit must be a number")
     
