@@ -1,18 +1,26 @@
 # Exirující blog
 
-
 ## Jak spustit (dev)
-1. Instalace balíčků
+
+1 Instalace balíčků
+
 ```bash
-$ pip install -r requirements.txt
+pip install -r requirements.txt && python manage.py tailwind install
 ```
 
-2. Příprava skriptu
+2 Inicializace databáze
 ```bash
-$ chmod +x start-dev.sh
+python manage.py manage.py migrate
 ```
 
-3. Spuštění skriptu
+2 Příprava skriptu
+
 ```bash
-$ ./start-dev.sh
+chmod +x start-dev.sh
+```
+
+4 Spuštění skriptu
+
+```bash
+./start-dev.sh
 ```
