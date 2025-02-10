@@ -8,7 +8,12 @@
 console.log("Working directory: " + process.cwd());
 
 module.exports = {
-	content: ["../../app/templates/**/*.html", "../../app/templates/**/*.js", "../../app/templates/**/*.jsx"],
+	content: [
+		"../../app/templates/**/*.html",
+		"../../app/templates/**/*.js",
+		"../../app/templates/**/*.jsx",
+		"../../app/templates/**/**/*.html", // This will catch HTML files in all subdirectories
+	],
 	theme: {
 		extend: {},
 	},
