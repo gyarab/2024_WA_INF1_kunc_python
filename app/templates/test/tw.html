@@ -1,21 +1,10 @@
-{% load static tailwind_tags %}
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Django Tailwind</title>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		{% tailwind_css %}
-	</head>
-
-	<body class="bg-gray-50 leading-normal tracking-normal">
-		<div class="container mx-auto p-8">
-			<h1 class="text-4xl font-bold text-blue-600 mb-4">Welcome to Tailwind CSS</h1>
-			<div class="bg-white shadow-lg rounded-lg p-6">
-				<p class="text-gray-700 mb-4">This is a simple test page using Tailwind CSS utilities.</p>
-				<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Click me!</button>
-			</div>
-		</div>
-	</body>
-</html>
+{% extends 'base.html'%} {% block body %}
+<div class="container mx-auto p-8">
+	<p class="bg-gray-700">GRAY BG</p>
+	<h1 class="text-4xl font-bold text-blue-600 mb-4">Welcome to Tailwind CSS</h1>
+	<div class="bg-white shadow-lg rounded-lg p-6">
+		<p class="text-gray-700 mb-4">This is a simple test page using Tailwind CSS utilities.</p>
+		<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Click me!</button>
+	</div>
+</div>
+{% endblock %}
