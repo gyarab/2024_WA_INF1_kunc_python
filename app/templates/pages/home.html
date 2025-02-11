@@ -1,3 +1,9 @@
-{% extends 'base.html'%} {% block body %} {% for x in latest_posts %}
-<h1>{{ x.title }}</h1>
-{% endfor %} {% endblock %}
+{% extends 'base.html'%} 
+
+
+{% block body %} 
+    {% for post in latest_posts %}
+        <a href="{{ post.url }}">{{ post.title }}</a>
+    {% endfor %}
+
+{% endblock %}
