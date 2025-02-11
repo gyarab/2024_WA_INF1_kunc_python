@@ -1,10 +1,8 @@
-{% extends 'base.html'%} 
+{% extends "base.html" %}
 
-{% block body %} 
+{% block body %}
     <h1>{{ post.title }}</h1>
     <p>{{ post.description }}</p>
     <a href={{ post.author.url }}>{{ post.author.name }}</a>
     <p>{{ post.content }}</p>
-
-
-{% endblock %}
+{% endblock body %}
