@@ -3,24 +3,24 @@
 {% block body %}
     <h1>Blog, který se sám smaže</h1>
     <div class="flex gap-4 w-full justify-center items-start">
-        <div class="w-2/3 flex flex-col">
-            <h2>Nejnovější příspěvky</h2>
-            <div class="grid grid-cols-3 gap-4">
+        <div class="w-2/3 flex flex-col flex-grow min-h-full">
+            <h2 class="text-2xl">Nejnovější příspěvky</h2>
+            <div class="grid grid-cols-3 gap-4 flex-grow">
                 {% for post in latest_posts %}
-                    <div class="border p-4 flex flex-col h-full">
-                        <h2>{{ post.title }} - vyprší {{ post.expires_at|date:"d.m.Y H:i" }}</h2>
+                    <div class="border p-4 flex flex-col h-full flex-grow w-full">
+                        <h2 class="text-xl">{{ post.title }}</h2>
                         <p>{{ post.description }}</p>
                         <a href="{{ post.url }}">Číst dále</a>
                     </div>
                 {% endfor %}
             </div>
         </div>
-        <div class="w-1/3 flex flex-col">
-            <h2>Expirující příspěvky</h2>
-            <div class="space-y-4">
+        <div class="w-1/3 flex flex-col flex-grow min-h-full">
+            <h2 class="text-xl">Expirující příspěvky</h2>
+            <div class="space-y-4 flex-grow">
                 {% for post in expiring_posts %}
-                    <div class="border p-4 flex flex-col h-full">
-                        <h2>{{ post.title }} - vyprší {{ post.expires_at|date:"d.m.Y H:i" }}</h2>
+                    <div class="border p-4 flex flex-col h-full flex-grow">
+                        <h2 class="text-lg">{{ post.title }} - vyprší {{ post.expires_at|date:"d.m.Y H:i" }}</h2>
                         <p>{{ post.description }}</p>
                         <a href="{{ post.url }}">Číst dále</a>
                     </div>
