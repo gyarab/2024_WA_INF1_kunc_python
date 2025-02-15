@@ -5,14 +5,14 @@
  * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
  */
 
-console.log("Working directory: " + process.cwd());
-
 module.exports = {
 	content: [
 		"../../app/templates/**/*.html",
 		"../../app/templates/**/*.js",
 		"../../app/templates/**/*.jsx",
-		"../../app/templates/**/**/*.html", // This will catch HTML files in all subdirectories
+		"../../app/templates/**/**/*.html",
+		"../../app/templates/*.html",
+		"../../app/templates/**/*/*.html",
 	],
 	theme: {
 		extend: {},
