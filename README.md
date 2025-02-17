@@ -13,14 +13,8 @@ pip install -r requirements.txt && python manage.py tailwind install
 python manage.py manage.py migrate
 ```
 
-2 Příprava skriptu
+3.2 Spuštění vývojového serveru
 
 ```bash
-chmod +x start-dev.sh
-```
-
-4 Spuštění skriptu
-
-```bash
-./start-dev.sh
+python manage.py runserver
 ```
