@@ -13,7 +13,13 @@ pip install -r requirements.txt && python manage.py tailwind install
 python manage.py manage.py migrate
 ```
 
-3.2 Spuštění vývojového serveru
+3 Nahrání ukázkových dat
+
+```bash
+python manage.py loaddata init.json
+```
+
+4 Spuštění vývojového serveru
 
 ```bash
 python manage.py runserver
