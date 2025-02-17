@@ -24,11 +24,12 @@ def index(request):
     return render(request, "pages/home.html", {"latest_posts": latest_posts, "expiring_posts": expiring_posts})
 
 def post(request, post_id):
-    post = Post.objects.select_related('author').prefetch_related('tags').get(id=post_id)
+    post = Post.objects.select_related('author').prefetch_related('tags').prefetch_related("comments").get(id=post_id)
     post.author.url = reverse("author", args=[post.author.id])
     post.expiry_color = calculate_expiry_color(post.expires_at)
     post.tag_names = [tag.name for tag in post.tags.all()]
-
+    post.comment_list = post.comments.all()
+    
     return render(request, "pages/article.html", {"post": post})
 
 def authors(request):

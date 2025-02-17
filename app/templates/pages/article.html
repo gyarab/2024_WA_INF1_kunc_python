@@ -22,5 +22,18 @@
             </h3>
         </div>
         <div class="prose lg:prose-xl mx-auto">{{ post.content }}</div>
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold mt-4 mb-2">Komentáře</h2>
+            <div class="space-y-4">
+                {% for comment in post.comment_list %}
+                    <div class="border p-4 rounded-lg shadow-sm">
+                        <p class="text-gray-600">
+                            {{ comment.author_name }} - <span class="text-sm">{{ comment.created_at|date:"d.m.Y H:i" }}</span>
+                        </p>
+                        <p>{{ comment.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </article>
 {% endblock body %}
