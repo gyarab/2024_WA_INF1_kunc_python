@@ -1,33 +1,72 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h1 class="text-4xl font-bold text-center w-full">Blog, který se sám smaže</h1>
-    <!--
-    <div class="flex gap-4 w-full justify-center items-start">
-        <div class="w-2/3 flex flex-col flex-grow min-h-full">
-            <h2 class="text-2xl">Nejnovější příspěvky</h2>
-            <div class="grid grid-cols-3 gap-4 flex-grow">
+    <h1 class="text-center w-full mb-8">Blog</h1>
+    <div class="flex flex-row w-full gap-4 px-4">
+        <div class="flex flex-col w-2/3">
+            <h2 class="text-2xl font-bold mb-4">Latest hot shit 🔥</h2>
+            <div class="mb-8 border p-4 rounded-xl shadow-sm">
+                <h3 class="text-xl">
+                    {{ latest_posts.0.title }}
+                    <span class="text-gray-400 text-lg">
+                        {% for tag in latest_posts.0.tag_names %}
+                            [{{ tag }}]
+                            {% if not forloop.last %}{% endif %}
+                        {% endfor %}
+                    </span>
+                </h3>
+                <p class="text-gray-600">{{ latest_posts.0.author }}</p>
+                <p class="my-2 prose-s max-w-none">{{ latest_posts.0.content|truncatechars:400 }}</p>
+                <p class="text-gray-600">
+                    Datum smazání: <span style="color: {{ latest_posts.0.expiry_color }}">{{ latest_posts.0.expires_at|date:"d.m.Y" }}</span>
+                </p>
+                <a href="{{ latest_posts.0.url }}"
+                   class="mt-2 text-blue-600 hover:text-blue-800">Číst dále</a>
+            </div>
+            <h2 class="text-2xl font-bold mb-4">Nejnovější příspěvky</h2>
+            <div class="flex flex-col gap-4">
                 {% for post in latest_posts %}
-                    <div class="border p-4 flex flex-col h-full flex-grow w-full">
-                        <h2 class="text-xl">{{ post.title }}</h2>
-                        <p>{{ post.description }}</p>
-                        <a href="{{ post.url }}">Číst dále</a>
+                    <div class="border p-4 flex flex-col rounded-xl shadow-sm">
+                        <h3 class="text-xl font-semibold">
+                            {{ post.title }}
+                            <span class="text-gray-400 text-lg">
+                                {% for tag in post.tag_names %}
+                                    [{{ tag }}]
+                                    {% if not forloop.last %}{% endif %}
+                                {% endfor %}
+                            </span>
+                        </h3>
+                        <h5 class="text-gray-600">{{ post.author }}</h5>
+                        <p class="my-1 prose-s max-w-none">{{ post.content|truncatechars:250 }}</p>
+                        <p>
+                            Datum smazání: <span style="color: {{ post.expiry_color }}">{{ post.expires_at|date:"d.m.Y" }}</span>
+                        </p>
+                        <a href="{{ post.url }}" class="mt-2 text-blue-600 hover:text-blue-800">Číst dále</a>
                     </div>
                 {% endfor %}
             </div>
         </div>
-        <div class="w-1/3 flex flex-col flex-grow min-h-full">
-            <h2 class="text-xl">Expirující příspěvky</h2>
-            <div class="space-y-4 flex-grow">
-                {% for post in expiring_posts %}
-                    <div class="border p-4 flex flex-col h-full flex-grow">
-                        <h2 class="text-lg">{{ post.title }} - vyprší {{ post.expires_at|date:"d.m.Y H:i" }}</h2>
-                        <p>{{ post.description }}</p>
-                        <a href="{{ post.url }}">Číst dále</a>
-                    </div>
-                {% endfor %}
-            </div>
+        <div class="flex flex-col w-1/3">
+            <h2 class="text-2xl font-bold mb-4">Expirující příspěvky</h2>
+            {% for post in expiring_posts %}
+                <div class="border p-4 flex flex-col rounded-lg shadow-sm mb-4">
+                    <h3 class="text-xl font-semibold">
+                        {{ post.title }}
+                        <span class="text-gray-400 text-lg">
+                            {% for tag in post.tag_names %}
+                                [{{ tag }}]
+                                {% if not forloop.last %}{% endif %}
+                            {% endfor %}
+                        </span>
+                    </h3>
+                    <h5 class="text-gray-600">{{ post.author }}</h5>
+                    <p class="my-1 prose-s max-w-none">{{ post.content|truncatechars:100 }}</p>
+                    <p>
+                        Datum smazání: <span style="color: {{ post.expiry_color }}">{{ post.expires_at|date:"d.m.Y" }}</span>
+                    </p>
+                    <a href="{{ post.url }}" class="mt-2 text-blue-600 hover:text-blue-800">Číst dále</a>
+                </div>
+            {% endfor %}
         </div>
     </div>
-    -->
 {% endblock body %}

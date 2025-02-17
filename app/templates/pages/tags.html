@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1 class="text-4xl font-bold text-center mb-6">Rubriky</h1>
+        <div class="flex flex-wrap -mx-4">
+            {% for tag in tags %}
+                <div class="w-full md:w-1/3 px-4 mb-8">
+                    <div class="border p-4 rounded-lg shadow-sm">
+                        <h5 class="text-xl font-semibold">{{ tag.name }}</h5>
+                        <p class="text-gray-600">Počet článků: {{ tag.post_count }}</p>
+                        <p>
+                            Náhodný článek: <a href="{{ tag.random_post.url }}"
+    class="text-blue-600 hover:text-blue-800">{{ tag.random_post.title }}</a>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}

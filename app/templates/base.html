@@ -18,13 +18,10 @@
                         <a href="{% url "index" %}"class="text-gray-300 hover:text-white">Domů</a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-300 hover:text-white">Rubriky</a>
+                        <a href="{% url 'tags' %}" class="text-gray-300 hover:text-white">Rubriky</a>
                     </li>
                     <li>
-                        <a href="#" class="text-gray-300 hover:text-white">Články</a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-gray-300 hover:text-white">Autoři</a>
+                        <a href="{% url 'authors' %}" class="text-gray-300 hover:text-white">Autoři</a>
                     </li>
                 </ul>
             </div>

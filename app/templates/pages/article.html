@@ -1,8 +1,26 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h1>{{ post.title }}</h1>
-    <p>{{ post.description }}</p>
-    <a href={{ post.author.url }}>{{ post.author.name }}</a>
-    <p>{{ post.content }}</p>
+    <article class="container mx-auto px-4 max-w-3xl">
+        <h1 class="text-4xl font-bold text-center mb-6">
+            {{ post.title }}
+            <span class="text-gray-400 text-2xl">
+                {% for tag in post.tag_names %}
+                    [{{ tag }}]
+                    {% if not forloop.last %}{% endif %}
+                {% endfor %}
+            </span>
+        </h1>
+        <div class="text-center mb-8">
+            <p class="text-gray-600">
+                Datum smazání:
+                <span class="font-medium" style="color: {{ post.expiry_color }}">{{ post.expires_at|date:"d.m.Y" }}</span>
+            </p>
+            <h3 class="text-xl mt-4">
+                <a href="{{ post.author.url }}"
+                   class="text-blue-600 hover:text-blue-800 underline">{{ post.author.name }}</a>
+            </h3>
+        </div>
+        <div class="prose lg:prose-xl mx-auto">{{ post.content }}</div>
+    </article>
 {% endblock body %}
