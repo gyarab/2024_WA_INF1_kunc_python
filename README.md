@@ -9,6 +9,7 @@ pip install -r requirements.txt && python manage.py tailwind install
 ```
 
 2 Inicializace databáze
+
 ```bash
 python manage.py manage.py migrate
 ```
