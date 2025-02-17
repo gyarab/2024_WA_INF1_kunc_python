@@ -1,5 +1,7 @@
 # Exirující blog
 
+Blog, který automaticky maže nudné články.
+
 ## Jak spustit (dev)
 
 1 Instalace balíčků
