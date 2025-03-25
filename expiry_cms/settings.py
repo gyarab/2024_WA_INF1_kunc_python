@@ -1,3 +1,6 @@
+from shutil import which
+import os
+
 """
 Django settings for expiry_cms project.
 
@@ -11,6 +14,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import subprocess
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -132,3 +136,17 @@ TAILWIND_APP_NAME = "main_theme"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+NPM_BIN_PATH = which("npm")
+if os.environ.get("ENV") == "PRODUCTION":
+    nvm_dir = os.environ.get("NVM_DIR", os.path.expanduser("~/.nvm"))
+    
+    try:
+        node_version = subprocess.check_output(
+            ["/bin/bash", "-ic", "nvm current"], 
+            text=True
+        ).strip()
+        
+        NPM_BIN_PATH = os.path.join(nvm_dir, "versions", "node", node_version, "bin", "npm")
+    except Exception as e:
+        print(f"Error determining npm path: {e}")
