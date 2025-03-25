@@ -138,15 +138,3 @@ INTERNAL_IPS = [
 ]
 
 NPM_BIN_PATH = which("npm")
-if os.environ.get("ENV") == "PRODUCTION":
-    nvm_dir = os.environ.get("NVM_DIR", os.path.expanduser("~/.nvm"))
-    
-    try:
-        node_version = subprocess.check_output(
-            ["/bin/bash", "-ic", "nvm current"], 
-            text=True
-        ).strip()
-        
-        NPM_BIN_PATH = os.path.join(nvm_dir, "versions", "node", node_version, "bin", "npm")
-    except Exception as e:
-        print(f"Error determining npm path: {e}")
