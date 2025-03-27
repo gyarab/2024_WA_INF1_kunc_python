@@ -82,4 +82,7 @@ def meta(request):
     remote_addr = request.META.get('REMOTE_ADDR')
 
     user_agent = request.META.get('HTTP_USER_AGENT', '')
-    return JsonResponse({"forwarded_for": forwarded_for, "remote_addr": remote_addr, "user_agent": user_agent})
+
+    uuid_cookie = request.COOKIES.get('uuid')
+
+    return JsonResponse({"forwarded_for": forwarded_for, "remote_addr": remote_addr, "user_agent": user_agent, "uuid_cookie": uuid_cookie})
