@@ -36,4 +36,12 @@
             </div>
         </div>
     </article>
+    <form method="post"
+          action="{% url 'post' post.id %}"
+          class="mt-8 flex justify-center items-center space-y-4 flex-col">
+        {% csrf_token %}
+        {{ form.as_div }}
+        <button type="submit"
+                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-800">Odeslat</button>
+    </form>
 {% endblock body %}

@@ -32,6 +32,8 @@ class Comment(models.Model):
     id = models.AutoField(primary_key=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     author_name = models.CharField(max_length=100, default="Anonymous")
+    author_ip = models.GenericIPAddressField(default="1.2.3.4")
+    author_user_agent = models.CharField(max_length=200, default="")
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
