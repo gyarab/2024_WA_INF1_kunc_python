@@ -76,3 +76,10 @@ def author(request, author_id):
 
 def tag(request, tag_id):
     return JsonResponse({"error": "Not found"}, status=404)
+
+def meta(request):
+    forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    remote_addr = request.META.get('REMOTE_ADDR')
+
+    user_agent = request.META.get('HTTP_USER_AGENT', '')
+    return JsonResponse({"forwarded_for": forwarded_for, "remote_addr": remote_addr, "user_agent": user_agent})
