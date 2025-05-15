@@ -16,7 +16,7 @@
                 <a href="{% url "index" %}" class="text-white text-lg font-bold">Expirující blog</a>
                 <ul class="flex space-x-4">
                     <li>
-                        <a href="{% url "index" %}"class="text-gray-300 hover:text-white">Domů</a>
+                        <a href="{% url "index" %}" class="text-gray-300 hover:text-white">Domů</a>
                     </li>
                     <li>
                         <a href="{% url 'tags' %}" class="text-gray-300 hover:text-white">Rubriky</a>
@@ -24,15 +24,26 @@
                     <li>
                         <a href="{% url 'authors' %}" class="text-gray-300 hover:text-white">Autoři</a>
                     </li>
+                    <li>
+                        {% if user.is_authenticated %}
+                            <span class="text-green-400 font-semibold">{{ user.first_name }} {{ user.last_name }}</span>
+                            <a href="{% url "logout" %}"
+                               class="ml-2 px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 transition">Logout</a>
+                        {% else %}
+                            <a href="{% url "social:begin" "google-oauth2" %}"
+                               class="px-3 py-1 rounded bg-yellow-400 text-gray-900 font-semibold hover:bg-yellow-300 transition shadow">Log in with Google</a>
+                        {% endif %}
+                    </li>
                 </ul>
-            </div>
-        </nav>
-        <div class="container mx-auto p-4">
-            {% block body %}
-            {% endblock body %}
+            </ul>
         </div>
-        <footer class="bg-gray-700 p-4 text-center text-gray-300 flex justify-center">
-            <div id="klikz-12"></div>
-        </footer>
-    </body>
+    </nav>
+    <div class="container mx-auto p-4">
+        {% block body %}
+        {% endblock body %}
+    </div>
+    <footer class="bg-gray-700 p-4 text-center text-gray-300 flex justify-center">
+        <div id="klikz-12"></div>
+    </footer>
+</body>
 </html>
