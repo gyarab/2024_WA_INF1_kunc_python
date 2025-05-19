@@ -7,7 +7,7 @@
             {% for author in authors %}
                 <div class="w-full md:w-1/3 px-4 mb-8">
                     <div class="border p-4 rounded-lg shadow-sm">
-                        <h5 class="text-xl font-semibold">{{ author.name }}</h5>
+                        <h5 class="text-xl font-semibold">{{ author }}</h5>
                         <p class="text-gray-600">Počet článků: {{ author.post_count }}</p>
                         <p>
                             Náhodný článek: <a href="{{ author.random_post.url }}"

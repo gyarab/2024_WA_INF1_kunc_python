@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from app.models import Post, Author, Tag, Comment
+from app.models import Post, Tag, Comment
 from django.urls import reverse
 from .lib.color_calc import calculate_expiry_color
 from django.http import JsonResponse
 from app.forms import CommentForm
 from django.contrib.auth import logout as auth_logout
 from django.shortcuts import redirect
+from django.contrib.auth import get_user_model
+from django.db import models
 
 def logout(request):
     if request.user.is_authenticated:
@@ -16,7 +18,6 @@ def logout(request):
 def index(request):
     latest_posts = Post.objects.select_related('author').prefetch_related('tags').all()[:5]
     expiring_posts = Post.objects.select_related('author').prefetch_related('tags').filter(expires_at__isnull=False).order_by("expires_at")[:5]
-    
 
     for post in latest_posts:
         post.url = reverse("post", args=[post.id])
@@ -60,13 +61,16 @@ def post(request, post_id):
     return render(request, "pages/article.html", {"post": post, "form": form})
 
 def authors(request):
-    authors = Author.objects.all().prefetch_related("post_set")
+    posts = Post.objects.select_related('author').all()
+    authors = set(post.author for post in posts if post.author is not None)
 
     for author in authors:
         author.url = reverse("author", args=[author.id])
-        author.post_count = author.post_set.count()
-        author.random_post = author.post_set.order_by('?').first()
-        author.random_post.url = reverse("post", args=[author.random_post.id])
+        author.post_count = posts.filter(author=author).count()
+        random_post = posts.filter(author=author).order_by('?').first()
+        author.random_post = random_post
+        if random_post:
+            author.random_post.url = reverse("post", args=[random_post.id])
 
     return render(request, "pages/authors.html", {"authors": authors})
 
