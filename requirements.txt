@@ -3,4 +3,4 @@ django-tailwind
 django-tailwind[reload]
 djlint
 python-dotenv
-django-social-auth
+social-auth-app-django
