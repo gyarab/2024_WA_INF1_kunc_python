@@ -4,8 +4,15 @@ from django.urls import reverse
 from .lib.color_calc import calculate_expiry_color
 from django.http import JsonResponse
 from app.forms import CommentForm
+from django.contrib.auth import logout as auth_logout
+from django.shortcuts import redirect
 
+def logout(request):
+    if request.user.is_authenticated:
+        auth_logout(request)
 
+    return redirect(reverse("index"))
+    
 def index(request):
     latest_posts = Post.objects.select_related('author').prefetch_related('tags').all()[:5]
     expiring_posts = Post.objects.select_related('author').prefetch_related('tags').filter(expires_at__isnull=False).order_by("expires_at")[:5]
@@ -27,25 +34,28 @@ def index(request):
 def post(request, post_id):
 
     if request.method == "POST":
+        if not request.user.is_authenticated:
+            return JsonResponse({"error": "You must be logged in to comment"}, status=403)
 
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             post_obj = Post.objects.get(id=post_id)
             comment = Comment()
             comment.post = post_obj
-            comment.author_name = comment_form.cleaned_data["author_name"]
+            comment.author = request.user
             comment.content = comment_form.cleaned_data["content"]
-            comment.author_ip = request.META.get('REMOTE_ADDR')
-            comment.author_user_agent = request.META.get('HTTP_USER_AGENT', '')[:200]
             comment.save()
 
-    post = Post.objects.select_related('author').prefetch_related('tags').prefetch_related("comments").get(id=post_id)
+    post = Post.objects.select_related('author').prefetch_related('tags').prefetch_related(
+        "comments__author"
+    ).get(id=post_id)
     post.author.url = reverse("author", args=[post.author.id])
     post.expiry_color = calculate_expiry_color(post.expires_at)
     post.tag_names = [tag.name for tag in post.tags.all()]
-    post.comment_list = post.comments.all()
-
+    post.comment_list = post.comments.select_related('author').all()
     form = CommentForm()
+
+    print(post.comment_list[0].author)
     
     return render(request, "pages/article.html", {"post": post, "form": form})
 

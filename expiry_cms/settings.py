@@ -111,11 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = [
     "social_core.backends.google.GoogleOAuth2",
-)
-
-SOCIAL_AUTH_URL_NAMESPACE = "auth"
+]
 
 
 # Internationalization
@@ -146,5 +144,8 @@ TAILWIND_APP_NAME = "main_theme"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+LOGIN_REDIRECT_URL = "/"
+SOCIAL_AUTH_GOOGLE_OAUTH2_REDIRECT_URI = "http://127.0.0.1:8000/complete/google-oauth2/"
 
 NPM_BIN_PATH = which("npm")
