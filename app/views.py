@@ -3,11 +3,47 @@ from app.models import Post, Tag, Comment
 from django.urls import reverse
 from .lib.color_calc import calculate_expiry_color
 from django.http import JsonResponse
-from app.forms import CommentForm
+from app.forms import CommentForm, RegistrationForm, LoginForm
 from django.contrib.auth import logout as auth_logout
 from django.shortcuts import redirect
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login, authenticate
 from django.db import models
+
+def _register(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        email = request.POST.get("email")
+
+        User = get_user_model()
+        user = User.objects.create_user(username=username, password=password, email=email)
+        user.save()
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+
+
+        return redirect(reverse("index"))
+
+    return render(request, "pages/register.html", {"form": RegistrationForm()})
+
+
+def _login(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        User = get_user_model()
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect(reverse("index"))
+        else:
+            return JsonResponse({"error": "Invalid credentials"}, status=403)
+
+    return render(request, "pages/login.html", {"form": LoginForm()})
 
 def logout(request):
     if request.user.is_authenticated:
