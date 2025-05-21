@@ -28,10 +28,10 @@
                         {% if user.is_authenticated %}
                             <span class="text-green-400 font-semibold">{{ user.first_name }} {{ user.last_name }}</span>
                             <a href="{% url "logout" %}"
-                               class="ml-2 px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 transition">Logout</a>
+                               class="ml-2 px-3 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 transition">Odhlásit se</a>
                         {% else %}
                             <a href="{% url "social:begin" "google-oauth2" %}"
-                               class="px-3 py-1 rounded bg-yellow-400 text-gray-900 font-semibold hover:bg-yellow-300 transition shadow">Log in with Google</a>
+                               class="px-3 py-1 rounded bg-yellow-400 text-gray-900 font-semibold hover:bg-yellow-300 transition shadow">Příhlásit se přes Google</a>
                         {% endif %}
                     </li>
                 </ul>
